@@ -122,5 +122,10 @@ class PostListView(ListView):
     ordering = ['-pub_date']
 class PostCreateView(CreateView):
     model = Diary
+    template_name = 'PostDiary.html'   
+    fields= ['title', 'description','author', 'created_date']   
+ class PostUpdateView(UpdateView):
+    model = Subjects
     template_name = 'PostSubject.html'   
-    fields= ['title', 'description','author', 'created_date']    
+    fields= ['title', 'description','author','created_date'] 
+    success_url = ('/')   
