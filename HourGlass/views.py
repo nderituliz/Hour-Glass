@@ -58,14 +58,14 @@ def updateprofile(request):
 def postsubject(request):
     current_user = request.user
     if request.method == 'POST':
-        form = SubjectForm(request.POST, request.FILES)
+        form = DiaryForm(request.POST, request.FILES)
         if form.is_valid():
-            subject = form.save(commit=False)
-            subject.author = current_user
-            subject.save()
+            diary = form.save(commit=False)
+            diary.author = current_user
+            diary.save()
         return redirect('/')
     else:
-        form = SubjectForm()
+        form = DiaryForm()
     context = {
         'form':form,
     }
