@@ -120,3 +120,7 @@ class PostListView(ListView):
     template_name = 'index.html'   
     context_object_name = 'diary'
     ordering = ['-pub_date']
+class PostCreateView(CreateView):
+    model = Diary
+    template_name = 'PostSubject.html'   
+    fields= ['title', 'description','author', 'created_date']    
