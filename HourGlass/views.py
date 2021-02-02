@@ -54,4 +54,36 @@ def updateprofile(request):
 
     return render(request, 'profile/update_profile.html', context)
 
+@login_required(login_url='/accounts/login/')
+def postsubject(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            subject = form.save(commit=False)
+            subject.author = current_user
+            subject.save()
+        return redirect('/')
+    else:
+        form = SubjectForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'PostSubject.html', context)
 
+@login_required(login_url='/accounts/login/')
+def get_diary(request, id):
+    diary = Diary.objects.get(pk=id)
+    return render(request, 'diary.html', {'diary':diary)
+
+@login_required(login_url='/accounts/login/')
+def search_diary(request):
+    if 'diary' in request.GET and request.GET['diary']:
+        search_term = request.GET["diary"]
+        searched_diary = Diary.search_diary(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message":message, "diary": searched_diary})
+    else:
+        message = "You haven't searched for any user"
+        return render(request, 'search.html', {"message":message})
