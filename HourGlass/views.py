@@ -129,3 +129,11 @@ class PostCreateView(CreateView):
     template_name = 'PostSubject.html'   
     fields= ['title', 'description','author','created_date'] 
     success_url = ('/')   
+class PostDeleteView(DeleteView):
+    model = Subjects
+    template_name = 'delete.html'
+    success_url = ('/')
+def deleteForm(request):
+    context ={     
+    }
+    return render(request ,'delete.html', context )    
