@@ -80,7 +80,7 @@ def updateprofile(request):
     return render(request, 'profile/update_profile.html', context)
 
 @login_required(login_url='/accounts/login/')
-def postsubject(request):
+def postdiary(request):
     current_user = request.user
     if request.method == 'POST':
         form = DiaryForm(request.POST, request.FILES)
@@ -105,7 +105,7 @@ def get_diary(request, id):
 def search_diary(request):
     if 'diary' in request.GET and request.GET['diary']:
         search_term = request.GET["diary"]
-        searched_diary = .search_diary(search_term)
+        searched_diary =Diary.search_diary(search_term)
         message = f"{search_term}"
 
         return render(request, 'search.html', {"message":message, "diary": searched_diary})
@@ -124,9 +124,9 @@ class PostCreateView(CreateView):
     model = Diary
     template_name = 'PostDiary.html'   
     fields= ['title', 'description','author', 'created_date']   
- class PostUpdateView(UpdateView):
+class PostUpdateView(UpdateView):
     model = Diary
-    template_name = 'PostSubject.html'   
+    template_name = 'PostDiary.html'   
     fields= ['title', 'description','author','created_date'] 
     success_url = ('/')   
 class PostDeleteView(DeleteView):

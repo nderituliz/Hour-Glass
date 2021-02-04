@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block content %}
+<div class="container" style="font-size: 20px; font-family: 'Merienda', cursive;  padding-top: 40px;">
+    <div class="my-pitches mb-5 mt-5"
+        style="box-shadow: 0 7px 8px 0 rgba(0,0,0,0.8), 0 10px 10px 0 rgba(0,0,0,0.8); margin-top: 10px;margin: 10px;">
+        <h3 class="text-center mt-5">Diary</h3>
+        <hr>
+        <h4 class="text-center mb-5 mt-5 pt-3 pb-5">Keeping a Diary with a To-do lists workS best for task-oriented folks who thrive on meeting goal</h4>
+    </div>
+</div>
+<section id="lists">
+  <div class="container-fluid">
+    <div class="container-fluid mb-5">
+      <div class="row">
+        <div class="col-md-8 pt-3">
+          <h4 style="text-align: center;">To-Do List</h4>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+    <div class="row pl-3 pr-3 ml-3 mr-3">
+        {% for diary in diary %}
+            <div class="col-md-4">
+                <div class="card-deck">
+                    <div class="card">
+                    <div class="view overlay zoom">
+                        <h4 class="text-center"> {{ diary.title }}</h4>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title"> {{ diary.description }}</h5>
+                        <a  class="btn btn-outline-info" href="/diary/{{diary.id}}">View details</a>
+                      </div>
+                      <div class="card-footer">
+                        <span class="dark-text"><img src="{{ diary.author.profile.image.url }}" alt=""  style="width: 50px; border-radius: 50%;">
+                        Posted By {{diary.author}} <br>
+                          <span class="ml-2 dark-text">On: {{diary.created_date}}</span></span>
+                      </div>
+                      <a class="btn btn-primary btn-sm mt-1 mb-sm" href="{% url 'update' diary.id%}">Update</a>
+                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete'  diary.id%}">Delete</a>
+                    </div>
+                  </div>
+            </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

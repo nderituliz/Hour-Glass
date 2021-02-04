@@ -11,12 +11,10 @@
     <title>The Hour Glass</title>
 </head>
 <body>
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid px-0 d nav-border text-white-50">
                     <div id="menu-toogle" class="d-flex align-items-center w-25 pl-4">
-                        <span class="mr-2">
-                            <img id="img-icon" src="{% static 'images/flash.svg' %}" style="width: 50px; height: 50px;">
-                        </span>
+        
                         <h6 class="mb-0 pr-4 f-10">MENU</h6>
                 </div>
   <a class="navbar-brand" href="{% url 'home'%}"><b>Hour Glass</b></a>
@@ -43,7 +41,7 @@
       </li>
     </ul>
             <div>
-              <a class="navbar-brand" href="{% url 'newsubject' %}">Add To-Do Lists</a>
+              <a class="navbar-brand" href="{% url 'newdiary' %}">Add To-Do Lists</a>
           </div>
         {% else %}
           <div>
@@ -60,8 +58,8 @@
         </ul>
       <div class="navbar-nav">
             <div class="text-center">
-            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_subjects' %}">
-            <input style="text-align: center;"  class="form-control" name="subject" type="search" placeholder="Search... " aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_diary' %}">
+            <input style="text-align: center;"  class="form-control" name="subject" type="search" placeholder="Search by title... " aria-label="Search">
             </form>
         </div>
       </div>
