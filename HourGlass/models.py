@@ -33,3 +33,32 @@ class Profile(models.Model):
 
     def save_profile(self):
         self.save()
+
+class Diary(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    description = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    title = models.CharField(max_length=255)
+    author_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default='1', blank = True)
+
+    def save_diary(self):
+        self.save()
+    def __str__(self):
+        return f'{self.author} Post'
+    class Meta:
+        db_table = 'diary'
+        ordering = ['-created_date']
+    def delete_diary(self):
+        self.delete()
+    @classmethod
+    def search_diary(cls,search_term):
+        diary = cls.objects.filter(title__icontains=search_term)
+        return diary
+
+    @classmethod
+    def get_diary(cls,id):
+        try:
+            diary = Diary.objects.get(pk=id)
+        except ObjectDoesNotExist:
+            raise Http404()
+        return Diary
